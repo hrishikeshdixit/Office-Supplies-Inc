@@ -1,0 +1,36 @@
+List all customer names, addresses, contact person names and phone numbers.  
+select cus_name as "Customer Name", billing_address as "Street", billing_city as "City", billing_state as 
+"State", billing_zip as "Zip", contact_name as "Contact Person Name", contact_phone as "Contact Person 
+Phone" from customer; 
+
+
+Pick an order, and get all the information about that order that appear in the order form. You don’t need 
+to compute taxes and totals. This query may be split into two sql statements. 
+select O.ORDER_ID, o. sales_rep_id, c.CUS_ID, c.CUS_NAME, c.CONTACT_NAME, c.BILLING_ADDRESS, 
+o.DELIVERY_ADDRESS, o.DELIVERY_CITY, o.DELIVERY_STATE, o.DELIVERY_ZIP, 
+i.ITEM_ID, i.ITEM_DESCRIPTION, 
+oi.QUANTITY, oi.UNIT_SALE_PRICE 
+from 
+customer c join orders O 
+on 
+c.CUS_ID=o.CUS_ID JOIN Order_Item OI 
+ON 
+O.ORDER_ID=OI.ORDER_ID JOIN ITEM I 
+ON 
+OI.ITEM_ID=I.ITEM_ID 
+WHERE O.ORDER_ID = '1012'; 
+
+select emp_id, emp_name from employee join orders on emp_id = SALES_REP_ID where 
+order_id = '1012'; 
+
+
+Pick a driver and list all orders (order numbers only) delivered by him/her.  
+Select d.emp_id as "Driver_Id", o.order_id from orders o join driver d on o.truck_id = 
+d.truck_id where d.emp_id = '50000'; 
+
+
+What is the total value (Quantity times unit price) of all inventory items that have unit prices exceeding 
+$25? 
+SELECT iTEM_ID, AVAILABLE_UNITS AS "INVENTORY AVAILABLE", UNIT_PRICE, 
+AVAILABLE_UNITS*UNIT_PRICE AS "TOTAL VALUE" FROM ITEM WHERE UNIT_PRICE > 
+25; 
